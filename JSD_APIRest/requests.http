@@ -1,0 +1,32 @@
+### Insert a new task
+POST http://localhost:5100/tasks
+Content-Type: application/json
+X-Tenant-ID: Frenzoid
+
+{
+  "Description": "fghfh thereAAAAAA"
+}
+
+
+### View tasks
+GET http://localhost:5100/tasks
+X-Tenant-ID: Jacob
+
+
+### Update task
+PUT http://localhost:5100/tasks/9d512dc1-df6e-4e4f-b9ef-afda7e42e9ae
+Content-Type: application/json
+X-tenant-ID: Frenzoid
+
+{
+  "Description": "Updated description"
+}
+
+### Access with banned tennant
+PUT http://localhost:5100/tasks/9d512dc1-df6e-4e4f-b9ef-afda7e42e9ae
+Content-Type: application/json
+X-tenant-ID: NotAllowed
+
+{
+  "Description": "a description"
+}
