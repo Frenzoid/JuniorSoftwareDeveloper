@@ -53,7 +53,7 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 
 - Also i assumed some minor stuff such as config for JSON serializations, and the way to handle the requests and responses.
 
-- Same thing for the HTTP Client, i assumed that we should use a custom HTTP Client for the DocuWare API so we can parametrize the base URL, and avoid writting the entire URL in the request.
+- Same thing for the HTTP Client, i tought that we can use a custom HTTP Client for the DocuWare API so we can parametrize the base URL, and avoid writting the entire URL in the request.
 
 - Also, major assumption: The structure of the project. I assumed that having a folder for the API, Common / Shared stuff, Infrastructure ( bussiness logic ), and Models will be a good way to organize the project, since i saw that in the docs and in some examples, but i am not sure if this is the best way to do it, so i would like to hear your feedback on that. ( I left a readme with an overview of the project structure PROJECT.md, and i also left comments in the code, so i hope you can understand my thought process and the logic behind some of the decisions i made )
 
