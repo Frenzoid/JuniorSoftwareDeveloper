@@ -49,7 +49,7 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 
 - I also assumed that that we may want to block banned tenants from accessing the API, so i added a middleware for that too, that checks if the tenant is in a banned list.
 
-- I used interfaces and models to handle the custom implementations of the services and data handling, i assumed that this is a common practice in .NET and other strictly typed languages, since i saw it in the docs and in some examples, so i tought to go along with it and make my own.
+- I used interfaces and models to handle the custom implementations of the services and data handling, i suppose this is a common practice in .NET and other strictly typed languages, since i saw it in the docs and in some examples, so i tought to go along with it and make my own.
 
 - Also i assumed some minor stuff such as config for JSON serializations, and the way to handle the requests and responses.
 
