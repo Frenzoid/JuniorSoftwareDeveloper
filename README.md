@@ -38,7 +38,7 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 1. **Hai riscontrato difficoltà? Dove?**
 - Well, to begin with, i had issues with .NET and the framework in general, i never worked with .NET before so i had to get the docs and chatgpt and start learning, still i have experience developing APIRests and backend services and i noticed that most of the concepts and design patterns are the same, so i was able to adapt quickly... although some stuff seems like magic for example that .net is able to resolve specific classes / objects / services just based on types this i found really interesting
 
-- But specifically I had issues implementing the Task Repository, since i realized that if we get multiple requests (say 1000 request per second), the file is being going to be overridden, so i had to use a semaphore to lock the file while the server accesses it.
+- But specifically I had issues implementing the Task Repository, since i realized that if we get multiple requests (say 1000 request per second), the file is going to be overwritten, so i had to use a semaphore to lock the file while the server accesses it.
 
 - I also had issues finding the credentials for the DocuWare API i was not able to find them in the swagger docs, so i peaked a bit in the other forks ( i hope its ok ) and i found the credentials in the others candidates code
 
