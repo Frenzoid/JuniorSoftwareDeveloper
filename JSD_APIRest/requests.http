@@ -1,10 +1,15 @@
+### DEBUG: Show settings
+GET http://localhost:5100/_config
+X-Tenant-ID: Frenzoid
+
+
 ### Insert a new task
 POST http://localhost:5100/tasks
 Content-Type: application/json
 X-Tenant-ID: Frenzoid
 
 {
-  "Description": "fghfh thereAAAAAA"
+  "Description": "2 thereAAAAAA"
 }
 
 
@@ -14,7 +19,7 @@ X-Tenant-ID: Jacob
 
 
 ### Update task
-PUT http://localhost:5100/tasks/9d512dc1-df6e-4e4f-b9ef-afda7e42e9ae
+PUT http://localhost:5100/tasks/0d2361b4-e05b-4d4c-9185-2a8a0b07f474
 Content-Type: application/json
 X-tenant-ID: Frenzoid
 
@@ -26,6 +31,15 @@ X-tenant-ID: Frenzoid
 PUT http://localhost:5100/tasks/9d512dc1-df6e-4e4f-b9ef-afda7e42e9ae
 Content-Type: application/json
 X-tenant-ID: NotAllowed
+
+{
+  "Description": "a description"
+}
+
+### Update other tenant task
+PUT http://localhost:5100/tasks/9d512dc1-df6e-4e4f-b9ef-afda7e42e9ae
+Content-Type: application/json
+X-tenant-ID: Jacob
 
 {
   "Description": "a description"

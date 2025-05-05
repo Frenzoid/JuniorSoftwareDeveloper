@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
@@ -12,11 +13,22 @@ using JSD.Common.Interfaces;
 // Builder for the web application
 var builder = WebApplication.CreateBuilder(args);
 
-// Configs ( default harcoded, should be on env vars )
+
+// Configs ( default harcoded in JSON, should load now on env vars )
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json",
+       optional: true,
+       reloadOnChange: true)
     .AddEnvironmentVariables();
-builder.Services.Configure<AppSettings>(builder.Configuration);
+
+// Bind settings to the AppSettings class
+//   this is to load the settings from the appsettings.json file into the AppSettings class
+builder.Services
+    .AddOptions<AppSettings>()
+    .Bind(builder.Configuration.GetSection("AppSettings"));
+
+
 
 // Service: JSON Repository for tasks
 builder.Services.AddSingleton<ITaskRepository, JsonTaskRepository>();
@@ -32,11 +44,14 @@ builder.Services.Configure<JsonOptions>(opts =>
     opts.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     opts.SerializerOptions.AllowTrailingCommas = true;
     opts.SerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
-}
-);
+});
+
 
 // Builddd
 var app = builder.Build();
+
+// DEBUG: Show loaded settings
+app.MapGet("/_config", (IOptions<AppSettings> settings) => settings.Value);
 
 // Middlewares
 //   Order: Force https -> Verify if tenant ID is present -> Verify if tenant ID is not in the blocked tenants list.
