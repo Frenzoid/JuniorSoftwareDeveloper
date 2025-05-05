@@ -6,7 +6,7 @@ First of all, i want to thank you for this challenge, i've never programmed in .
 
 The project contains some extra features that were not required, such as middleware for tenant validation since i wanted to play around with middlewares and get familiar with in .NET.
 
-In the code i left comments of my tough processes and the logic behind some of the decisions i made, i hope you dont mind.
+In the code i left comments and explanations mainly for me, in the case in which i need to come back to it and remember what i did, but i hope they will also help understand my thought process and the logic behind some of the decisions i made.
 
 
 

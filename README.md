@@ -55,17 +55,32 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 
 - Same thing for the HTTP Client, i tought that we can use a custom HTTP Client for the DocuWare API so we can parametrize the base URL, and avoid writting the entire URL in the request.
 
+- To have some minimal security and encription, i force all request to be done over HTTPS, altought we are missing a cert.
+
 - Also, major assumption: The structure of the project. I assumed that having a folder for the API, Common / Shared stuff, Infrastructure ( bussiness logic ), and Models will be a good way to organize the project, since i saw that in the docs and in some examples, but i am not sure if this is the best way to do it, so i would like to hear your feedback on that. ( I left a readme with an overview of the project structure PROJECT.md, and i also left comments in the code, so i hope you can understand my thought process and the logic behind some of the decisions i made )
 
 - I Wanted to try it out and deploy it on my VPS, thats why theres a Dockerfile.
 
 3. **Come miglioreresti il codice se fosse un progetto reale?**
 - I think we could create also a test file for the DocuWare Service too if we have more information about the API.
+
 - Going back to Task Repository: I think there could be a better way to handle the file access, i was thinking about it and if we stop the server right while it processes a request, the file will be corrupted or the queued async requests will be lost, but i suppose theres not much we can do with a file. Maybe implementing a messaging system consumer / producer would be a better solution, but i think that would be overkill for this project
+
 - Better logging for sure, the current logs are not very informative
+
 - A better / global error handling around the Routers ( API Maps ), that should return a custom message in case of an error ( file access, docuware api error, etc ), instead of the stack trace.
+
 - ENV Variables / Secrets for ANY configuration or credentials, i hardcoded the credentials for the DocuWare API, but in a real project we should use ENV variables or secrets to store them, and not hardcode them in the code
-- Avoid telling the user any sensitive data in the responses, for example right now, if a tennat tries to modify another's tenant task, it will tell them that that task belongs to antother tenant, which is not a good practice, we should just return a generic error message like "Task not found" or "Unauthorized" or something like that
+
+- Sswitch the tenant autentication with JWT tokens, and also implement a register / login logic for the tenants
+
+- There should be a way to cover input validation at application level, or is it always done with Dtos in .NET?
+
+- I think we can also add some security headers such as nosniff, cors, and hsts to avoid most of the common attacks, again i dont know if .NET's web framework has this by default, but i think its better if i mention it that if i suppose it has.
+
+- Avoid telling the user any sensitive data in the responses, for example right now, if a tennat tries to modify another's tenant task, it will tell them that that task belongs to antother tenant, which is not a good practice, we should just return a generic error message like "Task not found" or "Unauthorized" or something like that.
+
+- One last think i tought about this morning is to set a rate limit for the requests ( in case this is not covered by an api gateway ), to avoid DDOS attacks.
 
 4. **Hai usato strumenti di supporto (AI, StackOverflow, ecc)? Se sì, come?**
 - I used ChatGPT to learn about .NET, i didn't even know how to create a project or a sln solution or do imports. I used it to ask for simple code snippets, examples on how to implement stuff ( the api rest, middlewares, services, header access, etc ) and then i would follow up by asking about the code snippts and cross validate with the docs, as some examples given were pretty outdated
