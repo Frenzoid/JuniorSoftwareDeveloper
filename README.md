@@ -93,6 +93,8 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 - One last think i tought about this morning is to set a rate limit for the requests ( in case this is not covered by an api gateway ), to avoid DDOS attacks.
 
 4. **Hai usato strumenti di supporto (AI, StackOverflow, ecc)? Se sì, come?**
-- I used ChatGPT to learn about .NET, i didn't even know how to create a project or a sln solution or do imports. I used it to ask for simple code snippets, examples on how to implement stuff ( the api rest, middlewares, services, header access, etc ) and then i would follow up by asking about the code snippts and cross validate with the docs, as some examples given were pretty outdated
+- I used ChatGPT to learn about .NET, i didn't even know how to create a project or a sln solution or do imports. I used it to ask for simple code snippets, examples on how to implement stuff ( the api rest, middlewares, services, header access, etc ) and then i would follow up by asking about the code snippts and cross validate with the docs, as some examples given were pretty outdated.
+
+- The docs as i mentioned, it allowed me to learn what patterns to follow and how to implement the API, and also to learn about the framework in general.
 
 - I also used Copilot, i use it most of the time to avoid writing boilerplate code so i can focus on the actual logic of the project
