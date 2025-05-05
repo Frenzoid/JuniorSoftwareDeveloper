@@ -38,11 +38,17 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 1. **Hai riscontrato difficoltà? Dove?**
 - Well, to begin with, i had issues with .NET and the framework in general, i never worked with .NET before so i had to get the docs and chatgpt and start learning, still i have experience developing APIRests and backend services and i noticed that most of the concepts and design patterns are the same, so i was able to adapt quickly... although some stuff seems like magic for example that .net is able to resolve specific classes / objects / services just based on types this i found really interesting
 
-- But specifically I had issues implementing the Task Repository, since i realized that if we get multiple requests (say 1000 request per second), the file is going to be overwritten, so i had to use a semaphore to lock the file while the server accesses it.
+- But specifically I had issues implementing the Task Repository ( a singelton as a service i use to manage the JSON file ), since i realized that if we get multiple requests (say 1000 request per second), the file is going to be overwritten, so i had to use a semaphore to lock the file while the server accesses it.
 
 - I also had issues finding the credentials for the DocuWare API i was not able to find them in the swagger docs, so i peaked a bit in the other forks ( i hope its ok ) and i found the credentials in the others candidates code
 
+- Lastly, i lost quite the time doing the tests, since i didn't knew that for each test ( class methods ), xunit creates an instance of the class JUST to run each test, so i had conflicts while testing over the real JSON file, to solve this, what i do now is create a temp. JSON file for each test when a new instance is generated ( in constructor ), so there are no conflicts. This actually took some time since i had to learn how to re-inject a TaskRepository service with a different JSON file when the APITests were being run.
+
 2. **Hai fatto assunzioni? Se sì, quali?**
+- When storing / updating a new task, i load the entire file as an array of TaskItem, operate in memory over it ( insert / upadate.. ), and then i overwrite the original file with the updated in-memory file, thats where the use of semaphores comes in.
+
+- For docuware i created a service that queries the docuware api with a payload from the example i found in the swagger docs.
+
 - I assumed that in .NET when querying async functions, in the case that they are blocking, the thread will be blocked until the function returns, so for the Task Repository i assumed that the semaphore wont block the thread, but it will block the file from being overridden, which for now seems to be the case.
 
 - For all the validation and autentication, i use middlewares, i assumed that this is the way to do it in .NET since its a common practice in most of the frameworks.
