@@ -45,6 +45,8 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 - Lastly, i lost quite the time doing the tests, since i didn't knew that for each test ( class methods ), xunit creates an instance of the class JUST to run each test, so i had conflicts while testing over the real JSON file, to solve this, what i do now is create a temp. JSON file for each test when a new instance is generated ( in constructor ), so there are no conflicts. This actually took some time since i had to learn how to re-inject a TaskRepository service with a different JSON file when the APITests were being run.
 
 2. **Hai fatto assunzioni? Se sì, quali?**
+- When loading the app settings, we first load from the json, but if theres ENV variables, we overwrite the values with these, and then we populate the AppSettings class instance.
+
 - When storing / updating a new task, i load the entire file as an array of TaskItem, operate in memory over it ( insert / upadate.. ), and then i overwrite the original file with the updated in-memory file, thats where the use of semaphores comes in.
 
 - For docuware i created a service that queries the docuware api with a payload from the example i found in the swagger docs.
@@ -67,6 +69,8 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 
 - I Wanted to try it out and deploy it on my VPS, thats why theres a Dockerfile.
 
+- Theres a new endpoint "/_config" that returns the current configuration of the app ( not public, it still needs a tenant header to be able to access it ), i basically used it to test the ENV variables and the JSON file.
+
 3. **Come miglioreresti il codice se fosse un progetto reale?**
 - I think we could create also a test file for the DocuWare Service too if we have more information about the API.
 
@@ -76,7 +80,7 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 
 - A better / global error handling around the Routers ( API Maps ), that should return a custom message in case of an error ( file access, docuware api error, etc ), instead of the stack trace.
 
-- ENV Variables / Secrets for ANY configuration or credentials, i hardcoded the credentials for the DocuWare API, but in a real project we should use ENV variables or secrets to store them, and not hardcode them in the code
+- ENV Variables / Secrets for ANY configuration or credentials, and containerization when deployed.
 
 - Sswitch the tenant autentication with JWT tokens, and also implement a register / login logic for the tenants
 
