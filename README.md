@@ -76,7 +76,7 @@ Al seguente link trovi lo swagger: https://services.paloalto.swiss:10443/api2/sw
 
 - Going back to Task Repository: I think there could be a better way to handle the file access, i was thinking about it and if we stop the server right while it processes a request, the file will be corrupted or the queued async requests will be lost, but i suppose theres not much we can do with a file. Maybe implementing a messaging system consumer / producer would be a better solution, but i think that would be overkill for this project
 
-- Better logging for sure, the current logs are not very informative
+- Better logging for sure, the current logs are not very informative nor stored anywhere.
 
 - A better / global error handling around the Routers ( API Maps ), that should return a custom message in case of an error ( file access, docuware api error, etc ), instead of the stack trace.
 
