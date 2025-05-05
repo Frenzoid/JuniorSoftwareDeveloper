@@ -15,7 +15,7 @@ X-Tenant-ID: Frenzoid
 
 ### View tasks
 GET http://localhost:5100/tasks
-X-Tenant-ID: Jacob
+X-Tenant-ID: Frenzoid
 
 
 ### Update task
